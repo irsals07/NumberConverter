@@ -2,36 +2,36 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        // Example: Octal number represented by an array of digits
-        int[] octalArray = {3, 5, 2}; // Represents the octal number 352
+        // Example: Decimal number represented by an array of digits
+        int[] decimalArray = {1, 4, 10, 14}; // Represents the decimal number 1410
 
-        // Call the method to convert octal to binary
-        int[] binaryArray = convertOctalToBinary(octalArray);
+        // Call the method to convert decimal to hexadecimal
+        char[] hexadecimalArray = convertDecimalToHexadecimal(decimalArray);
 
         // Display the result
-        System.out.println("Binary representation: " + Arrays.toString(binaryArray));
+        System.out.println("Hexadecimal representation: " + Arrays.toString(hexadecimalArray));
     }
 
-    // Method to convert octal to binary using an array of digits
-    private static int[] convertOctalToBinary(int[] octalArray) {
-        // Convert the array of octal digits to a single octal number
-        int octalNumber = 0;
-        for (int digit : octalArray) {
-            octalNumber = octalNumber * 8 + digit;
+    // Method to convert decimal to hexadecimal using an array of digits
+    private static char[] convertDecimalToHexadecimal(int[] decimalArray) {
+        // Convert the array of decimal digits to a single decimal number
+        int decimalNumber = 0;
+        for (int digit : decimalArray) {
+            decimalNumber = decimalNumber * 10 + digit;
         }
 
-        // Convert octal to binary
-        int[] binaryArray = new int[20]; // Assuming a maximum length for the binary representation
-        int index = binaryArray.length - 1;
+        // Convert decimal to hexadecimal
+        char[] hexadecimalArray = new char[10]; // Assuming a maximum length for the hexadecimal representation
+        int index = hexadecimalArray.length - 1;
 
-        while (octalNumber != 0 && index >= 0) {
-            int remainder = octalNumber % 2;
-            binaryArray[index] = remainder;
-            octalNumber /= 2;
+        while (decimalNumber != 0 && index >= 0) {
+            int remainder = decimalNumber % 16;
+            hexadecimalArray[index] = (remainder < 10) ? (char) (remainder + '0') : (char) (remainder - 10 + 'A');
+            decimalNumber /= 16;
             index--;
         }
 
         // Trim the array to remove leading zeros
-        return Arrays.copyOfRange(binaryArray, index + 1, binaryArray.length);
+        return Arrays.copyOfRange(hexadecimalArray, index + 1, hexadecimalArray.length);
     }
 }

@@ -5,7 +5,7 @@ class ConverterRunner {
     public static void main(String[] args) {
         System.out.println("Welcome to the Number Converter!");
         System.out.println("--------------------------------");
-        System.out.print("Enter the base of your number (2, 8 or 10): ");
+        System.out.print("Enter the base of your number (2, 8, 10, or 16): ");
 
         Scanner s = new Scanner(System.in);
         String choice = s.nextLine();
@@ -38,6 +38,11 @@ class ConverterRunner {
                    octal = octal+nc.convertBinaryToOctal()[k];
                }
                System.out.println("Octal Number: " + octal);
+               String hex = "";
+               for(int j = 0; j<nc.convertToHexadecimal().length; j++){
+                   hex = hex+nc.convertToHexadecimal()[j];
+               }
+               System.out.println("Hexadecimal Number: "+ hex);
            }
            else{
                System.out.println("this number is not valid");
@@ -55,6 +60,11 @@ class ConverterRunner {
                 octal = octal+nc.convertDecimalToOctal()[k];
             }
             System.out.println("Octal Number: " +octal);
+            String hex = "";
+            for(int j = 0; j<nc.convertToHexadecimal().length; j++){
+                hex = hex+nc.convertToHexadecimal()[j];
+            }
+            System.out.println("Hexadecimal Number: "+ hex);
         }
         //when base is 8
         else if(base == 8){
@@ -68,6 +78,13 @@ class ConverterRunner {
                 binary = binary+nc.convertOctalToBinary()[k];
             }
             System.out.println("Binary Number: " + binary);
+            String hex = "";
+            for(int j = 0; j<nc.convertToHexadecimal().length; j++){
+                hex = hex+nc.convertToHexadecimal()[j];
+            }
+            System.out.println("Hexadecimal Number: "+ hex);
+        }
+        else if(base == 16){
 
         }
     }

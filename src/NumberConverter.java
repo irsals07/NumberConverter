@@ -126,5 +126,44 @@ public class NumberConverter {
         }
         return Arrays.copyOfRange(octal, index+1, octal.length);
     }
+
+    //Convert to hexadecimal
+    public char[] convertToHexadecimal(){
+        int unit = 0;
+        if(base == 2){
+            for (int digit : digits) {
+                unit = unit * 2 + digit;
+            }
+        }
+        else if(base == 8){
+            for (int digit : digits) {
+                unit = unit * 8 + digit;
+            }
+        }
+        else if(base == 10){
+            for (int digit : digits) {
+                unit = unit *10 + digit;
+            }
+        }
+        char[] hexadecimal = new char[10];
+        int index = hexadecimal.length-1;
+
+        while(unit!=0 && index>=0){
+            int remainder = unit%16;
+            if(remainder<10){
+                hexadecimal[index] = (char) (remainder + '0');
+                unit/= 16;
+                index--;
+            }
+            else{
+                hexadecimal[index] = (char) (remainder-10 + 'A');
+                unit /= 16;
+                index--;
+            }
+        }
+        return Arrays.copyOfRange(hexadecimal, index+1, hexadecimal.length);
+    }
+
+
 }
 
