@@ -2,36 +2,37 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        // Example: Decimal number represented by an array of digits
-        int[] decimalArray = {1, 4, 10, 14}; // Represents the decimal number 1410
+        // Example: Hexadecimal number represented by an array of characters
+        char[] hexadecimalArray = {'A', 'C', 'F'}; // Represents the hexadecimal number ACF
 
-        // Call the method to convert decimal to hexadecimal
-        char[] hexadecimalArray = convertDecimalToHexadecimal(decimalArray);
+        // Call the method to convert hexadecimal to binary
+        int[] binaryArray = convertHexadecimalToBinary(hexadecimalArray);
 
         // Display the result
-        System.out.println("Hexadecimal representation: " + Arrays.toString(hexadecimalArray));
+        System.out.println("Binary representation: " + Arrays.toString(binaryArray));
     }
 
-    // Method to convert decimal to hexadecimal using an array of digits
-    private static char[] convertDecimalToHexadecimal(int[] decimalArray) {
-        // Convert the array of decimal digits to a single decimal number
-        int decimalNumber = 0;
-        for (int digit : decimalArray) {
-            decimalNumber = decimalNumber * 10 + digit;
+    // Method to convert hexadecimal to binary using an array of characters
+    private static int[] convertHexadecimalToBinary(char[] hexadecimalArray) {
+        // Convert the array of hexadecimal characters to a single hexadecimal number
+        int hexadecimalNumber = 0;
+        for (char digit : hexadecimalArray) {
+            int digitValue = Character.isDigit(digit) ? (digit - '0') : (Character.toUpperCase(digit) - 'A' + 10);
+            hexadecimalNumber = hexadecimalNumber * 16 + digitValue;
         }
 
-        // Convert decimal to hexadecimal
-        char[] hexadecimalArray = new char[10]; // Assuming a maximum length for the hexadecimal representation
-        int index = hexadecimalArray.length - 1;
+        // Convert hexadecimal to binary
+        int[] binaryArray = new int[20]; // Assuming a maximum length for the binary representation
+        int index = binaryArray.length - 1;
 
-        while (decimalNumber != 0 && index >= 0) {
-            int remainder = decimalNumber % 16;
-            hexadecimalArray[index] = (remainder < 10) ? (char) (remainder + '0') : (char) (remainder - 10 + 'A');
-            decimalNumber /= 16;
+        while (hexadecimalNumber != 0 && index >= 0) {
+            int remainder = hexadecimalNumber % 2;
+            binaryArray[index] = remainder;
+            hexadecimalNumber /= 2;
             index--;
         }
 
         // Trim the array to remove leading zeros
-        return Arrays.copyOfRange(hexadecimalArray, index + 1, hexadecimalArray.length);
+        return Arrays.copyOfRange(binaryArray, index + 1, binaryArray.length);
     }
 }

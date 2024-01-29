@@ -13,7 +13,7 @@ class ConverterRunner {
 
         System.out.print("Enter your number: ");
         String number = s.nextLine();
-        int n = Integer.parseInt(number);
+        String n = number;
 
         s.close();
 
@@ -85,7 +85,21 @@ class ConverterRunner {
             System.out.println("Hexadecimal Number: "+ hex);
         }
         else if(base == 16){
-
+            String decimal = "Decimal Value: ";
+            for(int i = 0; i<nc.convertHexadecimalToDecimal().length; i++){
+                decimal = decimal + nc.convertHexadecimalToDecimal()[i];
+            }
+            System.out.println(decimal);
+            String binary = "Binary Value: ";
+            for(int i = 0; i<nc.convertHexadecimalToBinary().length; i++){
+                binary = binary + nc.convertHexadecimalToBinary()[i];
+            }
+            System.out.println(binary);
+            String octal = "Octal Value: ";
+            for(int i = 0; i<nc.convertHexadecimalToOctal().length; i++){
+                octal = octal + nc.convertHexadecimalToOctal()[i];
+            }
+            System.out.println(octal);
         }
     }
 }

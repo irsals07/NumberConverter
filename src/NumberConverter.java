@@ -3,16 +3,27 @@ import java.util.Arrays;
 public class NumberConverter {
     int[] digits;
     int base;
-    int number;
+    String number;
+    char[] hexa;
 
-    public NumberConverter(int number, int base) {
-        String numberAsString = Integer.toString(number);
+    public NumberConverter(String number, int base) {
+        String numberAsString = number;
         digits = new int[numberAsString.length()];
-        for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i,i+1);
-            int d = Integer.parseInt(single);
-            digits[i] = d;
+        hexa = new char[numberAsString.length()];
+        if(base == 16){
+            for(int i = 0; i<numberAsString.length(); i++){
+                char single = numberAsString.charAt(i);
+                hexa[i] = single;
+            }
         }
+        else{
+            for (int i = 0; i < numberAsString.length(); i++) {
+                String single = numberAsString.substring(i,i+1);
+                int d = Integer.parseInt(single);
+                digits[i] = d;
+            }
+        }
+
         this.base = base;
         this.number = number;
     }
@@ -28,6 +39,9 @@ public class NumberConverter {
 
     public int[] getDigits() {
         return digits;
+    }
+    public char[] gethexa(){
+        return hexa;
     }
 
     public int[] convertBinaryToDecimal() {
@@ -56,7 +70,7 @@ public class NumberConverter {
 
 
     public int[] convertDecimalToBinary() {
-        int original = number;
+        int original = Integer.parseInt(number);
         int counter = 0;
         for(int i = original; i>0; counter++){
             i = i/2;
@@ -164,6 +178,82 @@ public class NumberConverter {
         return Arrays.copyOfRange(hexadecimal, index+1, hexadecimal.length);
     }
 
+    //hex to decimal
+    public int[] convertHexadecimalToDecimal(){
+        int hexadecimalNumber = 0;
+        int digitValue = 0;
+        for (char digit : hexa) {
+            if(Character.isDigit(digit)){
+                digitValue = (digit - '0');
+            }
+            else{
+                digitValue = (Character.toUpperCase(digit) - 'A' + 10);
+            }
+            hexadecimalNumber = hexadecimalNumber * 16 + digitValue;
+        }
 
+        int[] decimal = new int[10];
+        int index = decimal.length-1;
+        while(hexadecimalNumber!=0 && index>=0){
+            int remainder = hexadecimalNumber%10;
+            decimal[index]= remainder;
+            hexadecimalNumber/=10;
+            index --;
+        }
+        return Arrays.copyOfRange(decimal, index+1, decimal.length);
+
+    }
+    //hex to binary
+    public int[] convertHexadecimalToBinary(){
+        int hexadecimalNumber = 0;
+        int digitValue = 0;
+        for (char digit : hexa) {
+            if(Character.isDigit(digit)){
+                digitValue = (digit - '0');
+            }
+            else{
+                digitValue = (Character.toUpperCase(digit) - 'A' + 10);
+            }
+            hexadecimalNumber = hexadecimalNumber * 16 + digitValue;
+        }
+
+        int[] binary = new int[10];
+        int index = binary.length-1;
+        while(hexadecimalNumber!=0 && index>=0){
+            int remainder = hexadecimalNumber%2;
+            binary[index]= remainder;
+            hexadecimalNumber/=2;
+            index --;
+        }
+
+        return Arrays.copyOfRange(binary, index+1, binary.length);
+
+    }
+
+    //hex to octal
+    public int[] convertHexadecimalToOctal(){
+        int hexadecimalNumber = 0;
+        int digitValue = 0;
+        for (char digit : hexa) {
+            if(Character.isDigit(digit)){
+                digitValue = (digit - '0');
+            }
+            else{
+                digitValue = (Character.toUpperCase(digit) - 'A' + 10);
+            }
+            hexadecimalNumber = hexadecimalNumber * 16 + digitValue;
+        }
+
+        int[] octal = new int[10];
+        int index = octal.length-1;
+        while(hexadecimalNumber!=0 && index>=0){
+            int remainder = hexadecimalNumber%8;
+            octal[index]= remainder;
+            hexadecimalNumber/=8;
+            index --;
+        }
+        return Arrays.copyOfRange(octal, index+1, octal.length);
+
+    }
 }
 
