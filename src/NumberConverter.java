@@ -6,6 +6,8 @@ public class NumberConverter {
     String number;
     char[] hexa;
 
+    String baseTo64 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
+
     public NumberConverter(String number, int base) {
         String numberAsString = number;
         digits = new int[numberAsString.length()];
@@ -254,6 +256,20 @@ public class NumberConverter {
         }
         return Arrays.copyOfRange(octal, index+1, octal.length);
 
+    }
+    public String convertBase(int num){
+        int total = Integer.parseInt(number);
+        String value = "";
+        while(total>0){
+            int remainder = total%num;
+            total/=num;
+            for(int i = 0; i<baseTo64.length(); i++){
+                if(i == remainder){
+                    value = baseTo64.charAt(i) + value;
+                }
+            }
+        }
+        return value;
     }
 }
 

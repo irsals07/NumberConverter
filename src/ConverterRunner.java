@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -5,19 +6,24 @@ class ConverterRunner {
     public static void main(String[] args) {
         System.out.println("Welcome to the Number Converter!");
         System.out.println("--------------------------------");
-        System.out.print("Enter the base of your number (2, 8, 10, or 16): ");
+
+        System.out.print("Enter the base of your number (2, 8, 10, 16): ");
+
 
         Scanner s = new Scanner(System.in);
         String choice = s.nextLine();
         int base = Integer.parseInt(choice);
+        String m = "";
+
 
         System.out.print("Enter your number: ");
-        String number = s.nextLine();
-        String n = number;
+        m = s.nextLine();
+
+
 
         s.close();
 
-        NumberConverter nc = new NumberConverter(n, base);
+        NumberConverter nc = new NumberConverter(m, base);
         int[] digits = nc.getDigits();
         // When base is 2
         if(base == 2){
@@ -65,6 +71,8 @@ class ConverterRunner {
                 hex = hex+nc.convertToHexadecimal()[j];
             }
             System.out.println("Hexadecimal Number: "+ hex);
+            System.out.println("Base 32: " + nc.convertBase(32));
+
         }
         //when base is 8
         else if(base == 8){
