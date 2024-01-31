@@ -19,21 +19,19 @@ class ConverterRunner {
         System.out.print("Enter your number: ");
         m = s.nextLine();
 
-
-
-        s.close();
-
         NumberConverter nc = new NumberConverter(m, base);
         int[] digits = nc.getDigits();
         // When base is 2
         if(base == 2){
             boolean valid = true;
+            //Make sure all values are either 0 or 1
             for (int digit : digits) {
                 if (digit != 1 && digit != 0) {
                     valid = false;
                 }
             }
            if(valid){
+               //Goes through all arrays that are returned and prints a final value
                int sum = 0;
                for(int i = 0; i<nc.convertBinaryToDecimal().length; i++){
                    sum+=nc.convertBinaryToDecimal()[i];
@@ -56,22 +54,38 @@ class ConverterRunner {
         }
         //when base is 10
         else if(base == 10){
-            String binary = "";
-            for(int i = 0; i<nc.convertDecimalToBinary().length; i++){
-                binary = binary+nc.convertDecimalToBinary()[i];
+            //Asks if the user wants to convert to a specific base
+            //If yes, asks for a base to convert to and returns the value
+            //If no, prints the original 3 base values
+            System.out.println("Do you want to convert to a specific base: (y/n): ");
+            Scanner specificBase = new Scanner(System.in);
+            String b = specificBase.nextLine();
+            if(b.equals("n")){
+                String binary = "";
+                for(int i = 0; i<nc.convertDecimalToBinary().length; i++){
+                    binary = binary+nc.convertDecimalToBinary()[i];
+                }
+                System.out.println("Binary number: "+binary);
+                String octal = "";
+                for(int k = 0; k<nc.convertDecimalToOctal().length; k++){
+                    octal = octal+nc.convertDecimalToOctal()[k];
+                }
+                System.out.println("Octal Number: " +octal);
+                String hex = "";
+                for(int j = 0; j<nc.convertToHexadecimal().length; j++){
+                    hex = hex+nc.convertToHexadecimal()[j];
+                }
+                System.out.println("Hexadecimal Number: "+ hex);
+
             }
-            System.out.println("Binary number: "+binary);
-            String octal = "";
-            for(int k = 0; k<nc.convertDecimalToOctal().length; k++){
-                octal = octal+nc.convertDecimalToOctal()[k];
+            else if (b.equals("y")){
+                System.out.println("What base do you want to convert to: ");
+                Scanner nb = new Scanner(System.in);
+                String input = nb.nextLine();
+                int newBase = Integer.parseInt(input);
+                System.out.println("Base " + newBase + ": " + nc.convertBase(newBase));
             }
-            System.out.println("Octal Number: " +octal);
-            String hex = "";
-            for(int j = 0; j<nc.convertToHexadecimal().length; j++){
-                hex = hex+nc.convertToHexadecimal()[j];
-            }
-            System.out.println("Hexadecimal Number: "+ hex);
-            System.out.println("Base 32: " + nc.convertBase(32));
+
 
         }
         //when base is 8
@@ -92,6 +106,7 @@ class ConverterRunner {
             }
             System.out.println("Hexadecimal Number: "+ hex);
         }
+        //when base is 16
         else if(base == 16){
             String decimal = "Decimal Value: ";
             for(int i = 0; i<nc.convertHexadecimalToDecimal().length; i++){
@@ -108,6 +123,9 @@ class ConverterRunner {
                 octal = octal + nc.convertHexadecimalToOctal()[i];
             }
             System.out.println(octal);
+        }
+        else{
+            System.out.println("not valid");
         }
     }
 }

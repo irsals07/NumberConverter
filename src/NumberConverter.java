@@ -46,6 +46,8 @@ public class NumberConverter {
         return hexa;
     }
 
+
+    //converts binary to decimal
     public int[] convertBinaryToDecimal() {
         int[] values = new int[digits.length];
         int exponent = 0;
