@@ -259,6 +259,7 @@ public class NumberConverter {
         return Arrays.copyOfRange(octal, index+1, octal.length);
 
     }
+    //converts base, takes in base num and follows the program to return the value from 10 to that base
     public String convertBase(int num){
         int total = Integer.parseInt(number);
         String value = "";

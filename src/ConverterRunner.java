@@ -125,7 +125,7 @@ class ConverterRunner {
             System.out.println(octal);
         }
         else{
-            System.out.println("not valid");
+            System.out.println("not valid, rerun");
         }
     }
 }
